@@ -18,11 +18,15 @@ public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoE
 		HttpServletResponse response = recursoCriadoEvent.getResponse();
 		Long codigo = recursoCriadoEvent.getCodigo();
 		
+		adicionarHeader(response,codigo);
+		
+	}
+	private void adicionarHeader(HttpServletResponse response, Long codigo) {
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
 				.buildAndExpand(codigo).toUri();
 			response.setHeader("Location", uri.toASCIIString());
 		
 	}
-
 
 }
